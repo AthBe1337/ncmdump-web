@@ -4,10 +4,6 @@
 
 由[taurusxin/ncmdump](https://github.com/taurusxin/ncmdump/)移植而来。
 
-## 1.1 Note
-
-改进了传参方式，大幅提高了转换效率。
-
 ## 示例页面
 
 这是一个简单的示例页面，可以直接使用。
