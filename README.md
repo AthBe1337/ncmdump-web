@@ -10,8 +10,6 @@
 
 [NCM 解密工具](https://tools.athbe.cn/ncm)
 
-![示例页面](https://cloud.athbe.cn/f/N0Ij/I@%28XB15M5_UU0FY4FDPM~EU.png)
-
 
 
 ## 构建
