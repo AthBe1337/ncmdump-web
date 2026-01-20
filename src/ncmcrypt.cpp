@@ -11,7 +11,6 @@
 #include <iostream>
 #include <cstring>
 
-#define TAGLIB_STATIC
 #include "taglib/toolkit/tbytevectorstream.h"
 #include "taglib/mpeg/mpegfile.h"
 #include "taglib/flac/flacfile.h"
