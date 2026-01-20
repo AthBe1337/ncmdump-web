@@ -20,6 +20,7 @@ self.onmessage = async (e) => {
     const { type, payload } = e.data;
 
     if (type === 'decrypt') {
+        let inputDataPtr = null;
         try {
             if (!isWasmReady) {
                 throw new Error("WASM模块尚未初始化完成");
@@ -28,7 +29,7 @@ self.onmessage = async (e) => {
             const fileData = new Uint8Array(payload.fileData);
             const baseName = payload.baseNameWithoutExtension || "output";
 
-            const inputDataPtr = wasmModule._malloc(fileData.length);
+            inputDataPtr = wasmModule._malloc(fileData.length);
             if (!inputDataPtr) {
                 throw new Error("无法为输入文件数据分配WASM内存");
             }
@@ -36,6 +37,12 @@ self.onmessage = async (e) => {
             wasmModule.HEAPU8.set(fileData, inputDataPtr);
 
             const resultView = wasmModule.decryptNCM(inputDataPtr, fileData.length);
+
+            if (resultView === null) {
+                const cppError = wasmModule.getLastError();
+                const cleanError = cppError.replace(/^std::\w+,\s*/, '');
+                throw new Error(cleanError || "未知错误");
+            }
 
             const result = new Uint8Array(resultView.length);
             result.set(resultView);
